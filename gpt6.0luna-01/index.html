@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f7fb">
+  <title>NOVA AI Chat</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="#" class="brand" aria-label="NOVA AIホーム">
+          <span class="brand-icon">✦</span>
+          <span>
+            <strong>NOVA AI</strong>
+            <small>INTELLIGENT CHAT</small>
+          </span>
+        </a>
+
+        <button class="icon-button mobile-close-button" id="closeSidebarButton" aria-label="メニューを閉じる">
+          ×
+        </button>
+      </div>
+
+      <button class="new-chat-button" id="newChatButton">
+        <span>＋</span>
+        新しいチャット
+      </button>
+
+      <div class="sidebar-label">会話履歴</div>
+
+      <div class="conversation-list" id="conversationList">
+        <!-- JavaScriptで生成 -->
+      </div>
+
+      <div class="sidebar-footer">
+        <button class="footer-button" id="settingsButton">
+          <span>⚙</span>
+          設定
+        </button>
+
+        <button class="footer-button danger-button" id="clearAllButton">
+          <span>♲</span>
+          すべて削除
+        </button>
+      </div>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="icon-button menu-button" id="openSidebarButton" aria-label="メニューを開く">
+            ☰
+          </button>
+
+          <div class="model-status">
+            <span class="online-dot"></span>
+            <div>
+              <strong>NOVA Neural Core</strong>
+              <small>オンライン</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          <button class="icon-button" id="exportButton" aria-label="会話を書き出す" title="会話を書き出す">
+            ↓
+          </button>
+
+          <button class="icon-button" id="topSettingsButton" aria-label="設定" title="設定">
+            ⚙
+          </button>
+        </div>
+      </header>
+
+      <section class="chat-area" id="chatArea">
+        <div class="welcome-panel" id="welcomePanel">
+          <div class="welcome-orb">✦</div>
+
+          <h1>
+            未来の思考を、<span>対話する。</span>
+          </h1>
+
+          <p>
+            アイデア整理、文章作成、学習、分析。<br>
+            あなたの思考を拡張するAIインターフェースです。
+          </p>
+
+          <div class="suggestion-grid">
+            <button class="suggestion-card">
+              <span class="suggestion-icon">✧</span>
+              新しいサービスのアイデアを考えて
+            </button>
+
+            <button class="suggestion-card">
+              <span class="suggestion-icon">◈</span>
+              複雑な内容をわかりやすく説明して
+            </button>
+
+            <button class="suggestion-card">
+              <span class="suggestion-icon">⌁</span>
+              仕事を効率化する方法を教えて
+            </button>
+
+            <button class="suggestion-card">
+              <span class="suggestion-icon">▣</span>
+              未来的なWebデザインを提案して
+            </button>
+          </div>
+        </div>
+
+        <div class="message-list" id="messageList">
+          <!-- JavaScriptで生成 -->
+        </div>
+      </section>
+
+      <section class="composer-section">
+        <form class="composer" id="composerForm">
+          <textarea
+            id="messageInput"
+            rows="1"
+            placeholder="メッセージを入力してください..."
+            autocomplete="off"
+          ></textarea>
+
+          <button
+            type="button"
+            class="voice-button"
+            id="voiceButton"
+            aria-label="音声入力"
+            title="音声入力"
+          >
+            ◉
+          </button>
+
+          <button
+            type="submit"
+            class="send-button"
+            aria-label="送信"
+            title="送信"
+          >
+            ↑
+          </button>
+        </form>
+
+        <div class="composer-help">
+          <span>Enterで送信</span>
+          <span>Shift + Enterで改行</span>
+          <span>Markdown対応</span>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="settingsModal" aria-hidden="true">
+    <section class="settings-modal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+      <div class="modal-header">
+        <div>
+          <span class="modal-kicker">PREFERENCES</span>
+          <h2 id="settingsTitle">設定</h2>
+        </div>
+
+        <button class="modal-close-button" id="closeSettingsButton" aria-label="設定を閉じる">
+          ×
+        </button>
+      </div>
+
+      <div class="settings-body">
+        <label class="setting-row">
+          <span>
+            <strong>テーマ</strong>
+            <small>ライト・ダークテーマを切り替えます</small>
+          </span>
+
+          <select id="themeSelect">
+            <option value="light">ライト</option>
+            <option value="dark">ダーク</option>
+          </select>
+        </label>
+
+        <label class="setting-row">
+          <span>
+            <strong>フォントサイズ</strong>
+            <small>チャット本文のサイズを変更します</small>
+          </span>
+
+          <select id="fontSizeSelect">
+            <option value="small">小</option>
+            <option value="medium">標準</option>
+            <option value="large">大</option>
+          </select>
+        </label>
+
+        <label class="setting-row switch-row">
+          <span>
+            <strong>Enterで送信</strong>
+            <small>オフにするとEnterで改行します</small>
+          </span>
+
+          <input type="checkbox" id="enterToSendCheckbox">
+          <span class="switch-ui"></span>
+        </label>
+
+        <div class="storage-info">
+          <span>保存先</span>
+          <strong>このブラウザのlocalStorage</strong>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="secondary-button" id="cancelSettingsButton">
+          キャンセル
+        </button>
+
+        <button class="primary-button" id="saveSettingsButton">
+          保存する
+        </button>
+      </div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
